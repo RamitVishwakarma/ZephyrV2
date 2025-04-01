@@ -1,12 +1,12 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Product Sans", sans-serif;
+  --font-sans: var(--font-product-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -76,7 +76,9 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --font-sans: "Product Sans", sans-serif;
+  /* font-sans */
+  --font-sans: var(--font-product-sans);
+  --background-pattern: url('/images/texture.png');
 }
 
 .dark {
@@ -91,32 +93,6 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-}
-
-@font-face {
-  font-family: "Product Sans";
-  src: url("/fonts/Product-Sans-Regular.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Product Sans";
-  src: url("/fonts/Product-Sans-Italic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Product Sans";
-  src: url("/fonts/Product-Sans-Bold.ttf") format("truetype");
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: "Product Sans";
-  src: url("/fonts/Product-Sans-Bold-Italic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
 }
 
 body {

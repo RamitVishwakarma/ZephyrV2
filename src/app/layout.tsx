@@ -1,34 +1,35 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
+import Layout from '@/components/common/layout';
 
 const productSans = localFont({
   src: [
     {
-      path: "../../public/fonts/Product-Sans-Regular.ttf",
-      weight: "400",
+      path: '../../public/fonts/Product-Sans-Regular.ttf',
+      weight: '400',
     },
     {
-      path: "../../public/fonts/Product-Sans-Italic.ttf",
-      weight: "400",
-      style: "italic",
+      path: '../../public/fonts/Product-Sans-Italic.ttf',
+      weight: '400',
+      style: 'italic',
     },
     {
-      path: "../../public/fonts/Product-Sans-Bold.ttf",
-      weight: "700",
+      path: '../../public/fonts/Product-Sans-Bold.ttf',
+      weight: '700',
     },
     {
-      path: "../../public/fonts/Product-Sans-Bold-Italic.ttf",
-      weight: "700",
-      style: "italic",
+      path: '../../public/fonts/Product-Sans-Bold-Italic.ttf',
+      weight: '700',
+      style: 'italic',
     },
   ],
-  variable: "--font-product-sans",
+  variable: '--font-product-sans',
 });
 
 export const metadata: Metadata = {
-  title: "Zephyr",
-  description: "Zephyr is an llm powered chatbot.",
+  title: 'Zephyr',
+  description: 'Zephyr is an llm powered chatbot.',
 };
 
 export default function RootLayout({
@@ -38,7 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${productSans.variable} antialiased`}>{children}</body>
+      <body className={`${productSans.variable} antialiased`}>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

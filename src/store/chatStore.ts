@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import axios from "axios";
+import { create } from 'zustand';
+import axios from 'axios';
 
 type Message = {
   question: string;
@@ -29,14 +29,14 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       );
       set({ session_id: response.data[0].session_id, messages: [] });
     } catch (error) {
-      console.error("Error creating chat session:", error);
+      console.error('Error creating chat session:', error);
     }
   },
 
   sendMessage: async (question: string) => {
     const { session_id, messages } = get();
     if (!session_id) {
-      console.error("No session ID. Start a chat session first.");
+      console.error('No session ID. Start a chat session first.');
       return;
     }
 
@@ -58,13 +58,13 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         question,
         answer:
           response.data[1] === 500
-            ? "Some error occurred, kindly resend the message or contact the team"
+            ? 'Some error occurred, kindly resend the message or contact the team'
             : response.data[0].answer,
       };
 
       set({ messages: [...messages, newMessage] });
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error('Error sending message:', error);
     }
   },
 }));

@@ -1,11 +1,9 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold">Zephyr</h1>
-      </div>
+      <p className="px-4 pt-16 text-4xl leading-[140%] font-bold tracking-[-0.72px] text-white">
+        Hey, How can we help you ?
+      </p>
     </>
   );
 }
