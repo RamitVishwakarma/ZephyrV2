@@ -22,14 +22,14 @@ import ChevronRight from '../../public/assets/chevronRight';
 import { useScreenWidth } from '../utils';
 
 export default function Home() {
-  const { session_id, createChatSession, sendMessage, messages } = useChatStore();
+  const { session_id, createChatSession, sendMessage, messages, loading } = useChatStore();
   const router = useRouter();
 
   const screenWidth = useScreenWidth();
   const cardWidth = screenWidth * 0.88;
 
   const formSchema = z.object({
-    question: z.string().min(1),
+    question: z.string().min(1, { message: 'Question is required' }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,11 +58,22 @@ export default function Home() {
     form.handleSubmit(onSubmit)();
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (loading) return;
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      if (form) {
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    }
+  };
+
   return (
     <HomeLayout>
       <div className="flex h-[calc(100dvh-66px)] flex-col justify-between">
         <p className="px-4 py-16 text-4xl leading-[140%] font-bold tracking-[-0.72px] text-white md:m-auto">
-          Hey, How can we help you?
+          Hey, how can we help you?
         </p>
         <div className="flex flex-col gap-9">
           <div className="md:hidden">
@@ -107,10 +118,11 @@ export default function Home() {
                     name="question"
                     placeholder="Type anything"
                     showError={false}
+                    handleKeyDown={handleKeyDown}
                   />
                   <Button
                     className="absolute right-3 bottom-3 size-[42px] rounded-full bg-[url('/buttonBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
-                    disabled={!form.formState.isValid}
+                    disabled={loading || !form.formState.isValid}
                     type="submit"
                   >
                     <ChevronRight width={24} height={24} />
@@ -123,7 +135,7 @@ export default function Home() {
               <p className="text-[11px] font-medium text-[#717171]">
                 Zephyr may show wrong club details; verify with our{' '}
                 <Link href="https://www.gdscjss.in/team" className="text-[#80B0FF]">
-                  Team
+                  team
                 </Link>
               </p>
             </div>

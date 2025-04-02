@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
-const AnswerReveal = ({ answer }: { answer: string }) => {
+export const AnswerReveal = ({ answer }: { answer: string }) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   const words = answer.split(' ');
   let delayPerWord = 0.05;
@@ -43,4 +45,29 @@ const AnswerReveal = ({ answer }: { answer: string }) => {
   );
 };
 
-export default AnswerReveal;
+export const MarkdownPreviewer = ({ content }: { content: string }) => {
+  return (
+    <motion.div
+      className="text-base leading-[160%] tracking-[-0.16px] text-[#D0D0D0] md:leading-[175%] md:-tracking-normal"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 10 }}
+    >
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ node, ...props }) => (
+            <a
+              {...props}
+              className="text-[#80B0FF] underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ),
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </motion.div>
+  );
+};

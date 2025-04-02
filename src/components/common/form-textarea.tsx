@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, KeyboardEvent } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import {
@@ -23,6 +23,7 @@ interface FormInputProps {
   disabled?: boolean;
   rows?: number;
   showError?: boolean;
+  handleKeyDown?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const FormTextarea: React.FC<FormInputProps> = memo(
@@ -36,8 +37,9 @@ const FormTextarea: React.FC<FormInputProps> = memo(
     disabled = false,
     showError = true,
     rows = 2,
+    handleKeyDown = () => {},
   }) => {
-    const { control } = useFormContext();
+    const { control, handleSubmit } = useFormContext();
 
     return (
       <FormField
@@ -67,6 +69,7 @@ const FormTextarea: React.FC<FormInputProps> = memo(
                     onChange(e);
                     onInputChange(e.target.value);
                   }}
+                  onKeyDown={handleKeyDown}
                   disabled={disabled}
                   className={cn(
                     'focus-visible:ring-1 focus-visible:ring-offset-0 aria-[invalid=true]:border-[#3D3F40] aria-[invalid=true]:ring-[#3D3F40]',

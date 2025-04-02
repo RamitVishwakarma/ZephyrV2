@@ -18,7 +18,7 @@ import useChatStore from '@/store/chatStore';
 import { Info, ZephyrLogo } from '../../../public/assets';
 import ChevronRight from '../../../public/assets/chevronRight';
 
-import AnswerReveal from './answer-reveal';
+import { AnswerReveal, MarkdownPreviewer } from './answer-reveal';
 
 const ChatPage = () => {
   const { messages, loading, sendMessage, createChatSession, session_id } = useChatStore();
@@ -32,6 +32,12 @@ const ChatPage = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (messages.length === 0) {
+      router.push('/');
+    }
+  }, [messages, router]);
 
   const formSchema = z.object({
     question: z.string().min(1, { message: 'Question is required' }),
@@ -49,6 +55,17 @@ const ChatPage = () => {
     }
     form.reset();
     await sendMessage(data.question);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (loading) return;
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      if (form) {
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    }
   };
 
   const { handleSubmit } = form;
@@ -105,7 +122,14 @@ const ChatPage = () => {
                       </div>
                     </div>
                     {/* Static Content */}
-                    <AnswerReveal answer={message.answer} />
+                    {message.answer.includes('```') ||
+                    message.answer.includes('#') ||
+                    message.answer.includes('*') ||
+                    message.answer.includes('[') ? (
+                      <MarkdownPreviewer content={message.answer} />
+                    ) : (
+                      <AnswerReveal answer={message.answer} />
+                    )}
                   </div>
                 </div>
               ))}
@@ -125,10 +149,11 @@ const ChatPage = () => {
                       name="question"
                       placeholder="Type anything"
                       showError={false}
+                      handleKeyDown={handleKeyDown}
                     />
                     <Button
                       className="absolute right-3 bottom-3 size-[42px] rounded-full bg-[url('/buttonBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
-                      disabled={!form.formState.isValid}
+                      disabled={loading || !form.formState.isValid}
                       type="submit"
                     >
                       <ChevronRight width={24} height={24} />
@@ -141,7 +166,7 @@ const ChatPage = () => {
                 <p className="text-[11px] font-medium text-[#717171]">
                   Zephyr may show wrong club details; verify with our{' '}
                   <Link href="https://www.gdscjss.in/team" className="text-[#80B0FF]">
-                    Team
+                    team
                   </Link>
                 </p>
               </div>
