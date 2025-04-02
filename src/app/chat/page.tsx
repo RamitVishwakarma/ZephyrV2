@@ -1,18 +1,21 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
-import { ZephyrLogo } from '../../../public/assets';
-import AnswerReveal from './answer-reveal';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import FormTextarea from '@/components/common/form-textarea';
+import Header from '@/components/common/header';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import FormTextarea from '@/components/common/form-textarea';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import ChevronRight from '../../../public/assets/chevronRight';
-import Header from '@/components/common/header';
 import useChatStore from '@/store/chatStore';
+
+import { ZephyrLogo } from '../../../public/assets';
+import ChevronRight from '../../../public/assets/chevronRight';
+
+import AnswerReveal from './answer-reveal';
 
 const ChatPage = () => {
   const { messages, loading, sendMessage, createChatSession, session_id } = useChatStore();

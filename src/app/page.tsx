@@ -1,21 +1,24 @@
 'use client';
 
-import MobileCards from '@/components/common/mobile-cards';
-import { Calendar, Education, FileWithCheck, Info, UserWithStar } from '../../public/assets';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { useScreenWidth } from '../utils';
-import FormTextarea from '@/components/common/form-textarea';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+
+import FormTextarea from '@/components/common/form-textarea';
+import HomeLayout from '@/components/common/home-layout';
+import MobileCards from '@/components/common/mobile-cards';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import Link from 'next/link';
-import ChevronRight from '../../public/assets/chevronRight';
+import { cards } from '@/lib/constants';
 import useChatStore from '@/store/chatStore';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import HomeLayout from '@/components/common/home-layout';
+
+import { Info } from '../../public/assets';
+import ChevronRight from '../../public/assets/chevronRight';
+import { useScreenWidth } from '../utils';
 
 export default function Home() {
   const { session_id, createChatSession, sendMessage, messages } = useChatStore();
@@ -98,7 +101,7 @@ export default function Home() {
             <div className="mb-9 flex flex-row items-center justify-center gap-2">
               <Info width={14} height={14} />
               <p className="text-[11px] font-medium text-[#717171]">
-                Zephyr may show wrong club details; verify with the{' '}
+                Zephyr may show wrong club details; verify with our{' '}
                 <Link href="https://www.gdscjss.in/team" className="text-[#80B0FF]">
                   Team
                 </Link>
@@ -110,22 +113,3 @@ export default function Home() {
     </HomeLayout>
   );
 }
-
-const cards = [
-  {
-    title: 'Explain how can I get into GDSC ?',
-    icon: FileWithCheck,
-  },
-  {
-    title: ' Tell me about the members of GDSC ?',
-    icon: UserWithStar,
-  },
-  {
-    title: 'What kind of events that GDSC organize ?',
-    icon: Calendar,
-  },
-  {
-    title: 'What is the role of Google within GDSC ?',
-    icon: Education,
-  },
-];

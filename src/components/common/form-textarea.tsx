@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { useFormContext } from 'react-hook-form';
+
 import {
   FormControl,
   FormDescription,
@@ -8,8 +9,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Textarea } from '../ui/textarea';
 import { cn } from '@/lib/utils';
+
+import { Textarea } from '../ui/textarea';
 
 interface FormInputProps {
   name: string;
@@ -42,7 +44,7 @@ const FormTextarea: React.FC<FormInputProps> = memo(
         control={control}
         name={name}
         render={({ field }) => {
-          const { value, onChange, onBlur } = field;
+          const { value, onChange } = field;
 
           return (
             <FormItem aria-disabled={disabled}>

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Header from './header';
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (

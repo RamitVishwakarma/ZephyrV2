@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const AnswerReveal = ({ answer }: { answer: string }) => {
   const words = answer.split(' ');
