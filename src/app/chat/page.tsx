@@ -72,7 +72,7 @@ const ChatPage = () => {
                   <div className="relative flex flex-col gap-4 md:hidden">
                     {/* LLM logo */}
                     <div className="relative">
-                      {loading ? (
+                      {loading && index === messages.length - 1 ? (
                         <motion.div
                           className="size-9 rounded-full bg-[url('/IconBg.svg')] bg-cover bg-center"
                           animate={{ rotate: 360 }}
@@ -91,7 +91,7 @@ const ChatPage = () => {
                   <div className="relative hidden gap-4 md:flex">
                     {/* LLM logo */}
                     <div className="relative">
-                      {loading ? (
+                      {loading && index === messages.length - 1 ? (
                         <motion.div
                           className="size-9 rounded-full bg-[url('/IconBg.svg')] bg-cover bg-center"
                           animate={{ rotate: 360 }}
