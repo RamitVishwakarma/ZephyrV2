@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ZephyrLogo } from '../../../public/assets';
 import AnswerReveal from './answer-reveal';
 import { Button } from '@/components/ui/button';
@@ -95,7 +95,7 @@ const ChatPage = () => {
                     showError={false}
                   />
                   <Button
-                    className="absolute top-2.5 right-7 size-[42px] rounded-full bg-[url('/iconBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
+                    className="absolute top-2.5 right-7 size-[42px] rounded-full bg-[url('/IconBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
                     disabled={!form.formState.isValid}
                     type="submit"
                   >

@@ -13,15 +13,12 @@ import { Form } from '@/components/ui/form';
 import Link from 'next/link';
 import ChevronRight from '../../public/assets/chevronRight';
 import useChatStore from '@/store/chatStore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import HomeLayout from '@/components/common/home-layout';
 
 export default function Home() {
   const { session_id, createChatSession, sendMessage, messages } = useChatStore();
-  const [loading, setLoading] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [question, setQuestion] = useState('');
   const router = useRouter();
 
   const screenWidth = useScreenWidth();
@@ -46,8 +43,6 @@ export default function Home() {
       await createChatSession();
     }
     await sendMessage(data.question);
-    setQuestion('');
-    setShowAnswer(true);
   };
 
   useEffect(() => {
@@ -92,7 +87,7 @@ export default function Home() {
                   showError={false}
                 />
                 <Button
-                  className="absolute top-2.5 right-7 size-[42px] rounded-full bg-[url('/iconBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
+                  className="absolute top-2.5 right-7 size-[42px] rounded-full bg-[url('/IconBg.svg')] bg-cover bg-center bg-no-repeat opacity-100 disabled:bg-[#1C1C1C] disabled:bg-none disabled:opacity-50"
                   disabled={!form.formState.isValid}
                   type="submit"
                 >
