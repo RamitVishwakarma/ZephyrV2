@@ -7,18 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'custom-pattern': 'var(--background-pattern)',
-      },
-      backgroundSize: {
-        'custom-size': '100px 100px',
-      },
-      backgroundPosition: {
-        'custom-position': '0% 0%',
-      },
       colors: {},
       fontFamily: {
         sans: ['var(--font-product-sans)'],
+      },
+      animation: {
+        'rotate-bg': 'rotate-bg 5s linear infinite',
+      },
+      keyframes: {
+        'rotate-bg': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
     },
   },

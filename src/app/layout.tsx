@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import Layout from '@/components/common/layout';
 
 const productSans = localFont({
   src: [
@@ -39,9 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${productSans.variable} antialiased`}>
-        <Layout>{children}</Layout>
-      </body>
+      <body className={`${productSans.variable} font-sans antialiased`}>{children}</body>
     </html>
   );
 }

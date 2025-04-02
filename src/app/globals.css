@@ -77,8 +77,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   /* font-sans */
-  --font-sans: var(--font-product-sans);
-  --background-pattern: url('/images/texture.png');
+  --font-sans: var(--font-product-sans), sans-serif;
 }
 
 .dark {
@@ -98,4 +97,31 @@
 body {
   font-family: var(--font-sans);
   font-size: var(--font-body);
+}
+
+/* Vibrant Scrollbar ::-webkit-scrollbar {
+  width: 5px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar:hover {
+  transform: scaleX(1.5);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #d480dc, #738cd3);
+  transition: all 0.3s ease;
+  border-radius: 10px;
+} */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  display: none;
 }
