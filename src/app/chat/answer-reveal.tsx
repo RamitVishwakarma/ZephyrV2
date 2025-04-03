@@ -51,7 +51,7 @@ export const MarkdownPreviewer = ({ content }: { content: string }) => {
       className="text-base leading-[160%] tracking-[-0.16px] text-[#D0D0D0] md:leading-[175%] md:-tracking-normal"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 10 }}
+      transition={{ duration: 3 }}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
