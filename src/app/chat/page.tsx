@@ -103,7 +103,14 @@ const ChatPage = () => {
                       </div>
                     </div>
                     {/* Static Content */}
-                    <AnswerReveal answer={message.answer} />
+                    {message.answer.includes('```') ||
+                    message.answer.includes('#') ||
+                    message.answer.includes('*') ||
+                    message.answer.includes('[') ? (
+                      <MarkdownPreviewer content={message.answer} />
+                    ) : (
+                      <AnswerReveal answer={message.answer} />
+                    )}
                   </div>
                   <div className="relative hidden gap-4 md:flex">
                     {/* LLM logo */}
