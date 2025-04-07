@@ -82,7 +82,6 @@ export default function Home() {
               drag="x"
               dragConstraints={{ right: 0, left: -cardWidth * 3 - 8 }} // 8 px -8 to make the space even
               dragElastic={1}
-              dragMomentum={false}
             >
               {cards.map((card, i) => (
                 <MobileCards
