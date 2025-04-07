@@ -10,6 +10,7 @@ type ChatStore = {
   session_id: string | null;
   messages: Message[];
   loading: boolean;
+  createChatSessionLoading: boolean;
   createChatSession: () => Promise<void>;
   sendMessage: (question: string) => Promise<void>;
 };
@@ -18,10 +19,13 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   session_id: null,
   messages: [],
   loading: false,
-
+  createChatSessionLoading: false,
   createChatSession: async () => {
+    const { createChatSessionLoading } = get();
+    if (createChatSessionLoading) return; // Prevent creating a session if already loading
+
     try {
-      set({ loading: true });
+      set({ createChatSessionLoading: true });
       const response = await axios.get<{ session_id: string }[]>(
         `${process.env.NEXT_PUBLIC_ZEPHYR_URL}create_chat`,
         {

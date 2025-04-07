@@ -42,11 +42,11 @@ export default function Home() {
   const { handleSubmit } = form;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    router.push('/chat');
     if (!session_id) {
       await createChatSession();
     }
     await sendMessage(data.question);
+    router.push('/chat');
   };
 
   useEffect(() => {
