@@ -127,6 +127,18 @@ export default function Home() {
                   >
                     <ChevronRight width={24} height={24} />
                   </Button>
+                  {loading && (
+                    <>
+                      <motion.div
+                        className="absolute right-3 bottom-3 size-9 rounded-full bg-[url('/IconBg.svg')] bg-cover bg-center"
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 2, ease: 'anticipate' }}
+                      ></motion.div>
+                      <div className="absolute right-5 bottom-5">
+                        <ChevronRight width={20} height={20} />
+                      </div>
+                    </>
+                  )}
                 </div>
               </form>
             </Form>
